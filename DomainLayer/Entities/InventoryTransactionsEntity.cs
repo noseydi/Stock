@@ -14,7 +14,7 @@ namespace DomainLayer.Entities
         public string WarehouseID { get; set; }
         public string ProductID { get; set; }
         public string SerialNumber { get; set; }
-        public string Quality { get; set; }
+        public string Quantity { get; set; }
         public DateTime TransactionDate { get; set; }
     }
 }
