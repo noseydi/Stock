@@ -9,7 +9,7 @@ namespace ApplicationLayer.Sevices
 {
     internal class RemainInStockService : IRemainInStock
     {
-        public int Count(int stockID, int productQuantity, char dimensions)
+        public int Count(int stockID)
         {
             throw new NotImplementedException();
         }
