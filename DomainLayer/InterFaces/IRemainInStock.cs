@@ -10,6 +10,6 @@ namespace DomainLayer.InterFaces
     {
         public int StockID (int stockID);
         public string ProductSerialNumber (int productID);
-        public int Count (int stockID,int productQuantity,char dimensions);
+        public int Count (int stockID);
     }
 }
