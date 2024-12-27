@@ -1,51 +1,78 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using DomainLayer.Entities;
+using DomainLayer.InterFaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using DomainLayer.Entities;
+using ApplicationLayer.DTOs;
+using DomainLayer.Services;
+using InfrustructureLayer.Repositories;
 using DomainLayer.Interfaces;
-namespace ApplicationLayer.Services
+
+
+namespace DomainLayer.Services
 {
-    public class ProductsService : IProductsService
+    public class ProductService : IProductService
     {
-        private readonly List<ProductsEntity> _products = new();
+        private readonly IProductService _productRepository;
 
-        public async Task<IEnumerable<ProductsEntity>> GetAllProductsAsync()
+        public ProductService(IProductService productRepository)
         {
-            return await Task.FromResult(_products);
+            _productRepository = productRepository;
         }
 
-        public async Task<ProductsEntity> GetProductByIdAsync(int productId)
+        public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
         {
-            var product = _products.FirstOrDefault(p => p.ProductID == productId);
-            return await Task.FromResult(product);
-        }
-
-        public async Task<ProductsEntity> AddProductAsync(ProductsEntity product)
-        {
-            _products.Add(product);
-            return await Task.FromResult(product);
-        }
-
-        public async Task<ProductsEntity> UpdateProductAsync(int productId, ProductsEntity product)
-        {
-            var existingProduct = _products.FirstOrDefault(p => p.ProductID == productId);
-            if (existingProduct != null)
+            var products = await _productRepository.GetAllProductsAsync();
+            return products.Select(p => new ProductDTO
             {
-                existingProduct.ProductName = product.ProductName;
-                existingProduct.Dimensions = product.Dimensions;
-            }
-            return await Task.FromResult(existingProduct);
+                ProductID = p.ProductID,
+                ProductName = p.ProductName,
+                Dimensions = p.Dimensions
+            });
         }
 
-        public async Task<bool> DeleteProductAsync(int productId)
+        public async Task<ProductDTO> GetProductByIdAsync(int id)
         {
-            var product = _products.FirstOrDefault(p => p.ProductID == productId);
+            var product = await _productRepository.GetProductByIdAsync(id);
+            if (product == null)
+            {
+                return null;
+            }
+
+            return new ProductDTO
+            {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                Dimensions = product.Dimensions
+            };
+        }
+
+        public async Task AddProductAsync(ProductDTO productDto)
+        {
+            var product = new ProductsEntity
+            {
+                ProductID = productDto.ProductID,
+                ProductName = productDto.ProductName,
+                Dimensions = productDto.Dimensions
+            };
+
+            await _productRepository.AddProductAsync(product);
+        }
+
+        public async Task UpdateProductAsync(ProductDTO productDto)
+        {
+            var product = await _productRepository.GetProductByIdAsync(productDto.ProductID);
             if (product != null)
             {
-                _products.Remove(product);
-                return await Task.FromResult(true);
+                product.ProductName = productDto.ProductName;
+                product.Dimensions = productDto.Dimensions;
+                await _productRepository.UpdateProductAsync(product);
             }
-            return await Task.FromResult(false);
+        }
+
+        public async Task DeleteProductAsync(int id)
+        {
+            await _productRepository.DeleteProductAsync(id);
         }
     }
+}
 }

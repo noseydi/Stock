@@ -1,59 +1,64 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using ApplicationLayer.DTOs;
+using DomainLayer.Interfaces;
+using DomainLayer.Services;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using DomainLayer.Entities;
-using DomainLayer.Interfaces;
 
-namespace StockProject.Controllers
+namespace WebAPI.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductsService _productsService;
+        private readonly IProductService _productService;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IProductService productService)
         {
-            _productsService = productsService;
+            _productService = productService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllProducts()
         {
-            var products = await _productsService.GetAllProductsAsync();
+            var products = await _productService.GetAllProductsAsync();
             return Ok(products);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductById(string id)
+        public async Task<IActionResult> GetProductById(int id)
         {
-            var product = await _productsService.GetProductByIdAsync(id);
-            if (product == null) return NotFound();
+            var product = await _productService.GetProductByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
             return Ok(product);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddProduct([FromBody] ProductsEntity product)
+        public async Task<IActionResult> AddProduct([FromBody] ProductDTO productDto)
         {
-            var newProduct = await _productsService.AddProductAsync(product);
-            return CreatedAtAction(nameof(GetProductById), new { id = newProduct.ProductID }, newProduct);
+            await _productService.AddProductAsync(productDto);
+            return CreatedAtAction(nameof(GetProductById), new { id = productDto.ProductID }, productDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(string id, [FromBody] ProductsEntity product)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductDTO productDto)
         {
-            var updatedProduct = await _productsService.UpdateProductAsync(id, product);
-            if (updatedProduct == null) return NotFound();
-            return Ok(updatedProduct);
+            if (id != productDto.ProductID)
+            {
+                return BadRequest();
+            }
+
+            await _productService.UpdateProductAsync(productDto);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(string id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            var result = await _productsService.DeleteProductAsync(id);
-            if (!result) return NotFound();
+            await _productService.DeleteProductAsync(id);
             return NoContent();
         }
     }

@@ -1,8 +1,9 @@
 ﻿namespace ApplicationLayer.DTOs
 {
-    public class CreateUpdateProductDTO
+    public class ProductDTO
     {
+        public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public string Dimensions { get; set; }
+        public int? Dimensions { get; set; }
     }
 }

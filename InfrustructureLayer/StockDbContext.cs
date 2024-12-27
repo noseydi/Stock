@@ -1,7 +1,7 @@
 ﻿using DomainLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DomainLayer.Entities
+namespace InfrustructureLayer.Entities
 {
     public class StockDbContext : DbContext
     {

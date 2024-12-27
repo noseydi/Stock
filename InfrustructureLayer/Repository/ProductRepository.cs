@@ -1,11 +1,11 @@
 ﻿using DomainLayer.Entities;
+using InfrustructureLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DomainLayer.Entities;
 
-namespace DomainLayer.Repositories
+namespace InfrustructureLayer.Repositories
 {
     public class ProductRepository 
     {
