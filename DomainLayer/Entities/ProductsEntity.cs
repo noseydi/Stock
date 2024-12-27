@@ -11,6 +11,6 @@ namespace DomainLayer.Entities
     {
         [Key] public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public char? Dimensions { get; set; }
+        public int? Dimensions { get; set; }
     }
 }
