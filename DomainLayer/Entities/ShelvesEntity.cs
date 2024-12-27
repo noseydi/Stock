@@ -9,10 +9,10 @@ namespace DomainLayer.Entities
 {
     public class ShelvesEntity
     {
-        [Key] public string ShelfID { get; set; }
-        public string WarehouseID { get; set; }
+        [Key] public int ShelfID { get; set; }
+        public int? WarehouseID { get; set; }
         public string SpacePerShelfCM { get; set; }
-        public string Levels { get; set; }
+        public int? Levels { get; set; }
 
 
     }

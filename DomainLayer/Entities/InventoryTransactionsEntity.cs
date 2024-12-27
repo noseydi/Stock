@@ -9,12 +9,12 @@ namespace DomainLayer.Entities
 {
     public class InventoryTransactionsEntity
     {
-        [Key] public string TransactionID { get; set; }
+        [Key] public int TransactionID { get; set; }
         public string TransactionType { get; set; }
-        public string WarehouseID { get; set; }
-        public string ProductID { get; set; }
+        public int? WarehouseID { get; set; }
+        public int? ProductID { get; set; }
         public string SerialNumber { get; set; }
-        public string Quantity { get; set; }
+        public int? Quantity { get; set; }
         public DateTime TransactionDate { get; set; }
     }
 }

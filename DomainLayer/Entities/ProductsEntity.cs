@@ -9,8 +9,8 @@ namespace DomainLayer.Entities
 {
     public class ProductsEntity
     {
-        [Key] public string ProductID { get; set; }
+        [Key] public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public string Dimensions { get; set; }
+        public char? Dimensions { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace DomainLayer.Entities
 {
     public class CitiesEntity
     {
-        [Key] public string CityID { get; set; }
+        [Key] public int CityID { get; set; }
         public string CityName { get; set; }
     }
 }

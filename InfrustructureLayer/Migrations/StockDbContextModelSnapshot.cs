@@ -24,8 +24,11 @@ namespace InfrustructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entities.CitiesEntity", b =>
                 {
-                    b.Property<string>("CityID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CityID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityID"));
 
                     b.Property<string>("CityName")
                         .IsRequired()
@@ -38,16 +41,17 @@ namespace InfrustructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entities.InventoryTransactionsEntity", b =>
                 {
-                    b.Property<string>("TransactionID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TransactionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("ProductID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionID"));
 
-                    b.Property<string>("Quality")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()
@@ -60,9 +64,8 @@ namespace InfrustructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WarehouseID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("WarehouseID")
+                        .HasColumnType("int");
 
                     b.HasKey("TransactionID");
 
@@ -78,13 +81,11 @@ namespace InfrustructureLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ProductID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ShelfID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ShelfID")
+                        .HasColumnType("int");
 
                     b.HasKey("SerialNumber");
 
@@ -93,12 +94,14 @@ namespace InfrustructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entities.ProductsEntity", b =>
                 {
-                    b.Property<string>("ProductID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
 
                     b.Property<string>("Dimensions")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -111,20 +114,21 @@ namespace InfrustructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entities.ShelvesEntity", b =>
                 {
-                    b.Property<string>("ShelfID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ShelfID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("Levels")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShelfID"));
+
+                    b.Property<int?>("Levels")
+                        .HasColumnType("int");
 
                     b.Property<string>("SpacePerShelfCM")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WarehouseID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("WarehouseID")
+                        .HasColumnType("int");
 
                     b.HasKey("ShelfID");
 
@@ -133,20 +137,21 @@ namespace InfrustructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entities.WarehouseTransferEntity", b =>
                 {
-                    b.Property<string>("TransferID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TransferID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("FromWarehouseID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransferID"));
+
+                    b.Property<int?>("FromWarehouseID")
+                        .HasColumnType("int");
 
                     b.Property<string>("SerialNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ToWarehouseID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ToWarehouseID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("TransferDate")
                         .HasColumnType("datetime2");
@@ -158,16 +163,18 @@ namespace InfrustructureLayer.Migrations
 
             modelBuilder.Entity("DomainLayer.Entities.WarehousesEntity", b =>
                 {
-                    b.Property<string>("WarehouseID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("WarehouseID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WarehouseID"));
 
                     b.Property<string>("AreaInSquareMeters")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CityID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CityID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Warehousename")
                         .IsRequired()

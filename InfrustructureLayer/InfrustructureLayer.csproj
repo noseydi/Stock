@@ -18,4 +18,10 @@
     <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DomainLayer">
+      <HintPath>..\DomainLayer\bin\Debug\net8.0\DomainLayer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

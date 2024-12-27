@@ -10,8 +10,8 @@ namespace DomainLayer.Entities
     public class ProductSerialsEntity
     {
         [Key] public string SerialNumber { get; set; }
-        public string ProductID { get; set; }
-        public string ShelfID { get; set; }
+        public int? ProductID { get; set; }
+        public int ShelfID { get; set; }
         public string Position { get; set; }
     }
 }

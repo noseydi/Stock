@@ -10,9 +10,9 @@ namespace DomainLayer.Entities
 {
     public class WarehouseTransferEntity
     {
-        [Key] public string TransferID { get; set; }
-        public string FromWarehouseID { get; set; }
-        public string ToWarehouseID { get; set; }
+        [Key] public int TransferID { get; set; }
+        public int? FromWarehouseID { get; set; }
+        public int? ToWarehouseID { get; set; }
         public string SerialNumber { get; set; }
         public DateTime TransferDate { get; set; }
 

@@ -9,9 +9,9 @@ namespace DomainLayer.Entities
 {
     public class WarehousesEntity
     {
-        [Key] public string WarehouseID { get; set; }
+        [Key] public int WarehouseID { get; set; }
         public string Warehousename { get; set; }
-        public string CityID { get; set; }
+        public int? CityID { get; set; }
         public string AreaInSquareMeters { get; set; }
 
     }

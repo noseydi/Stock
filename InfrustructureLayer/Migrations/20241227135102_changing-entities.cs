@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InfrustructureLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class changingentities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,8 @@ namespace InfrustructureLayer.Migrations
                 name: "Cities",
                 columns: table => new
                 {
-                    CityID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CityID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -27,12 +28,13 @@ namespace InfrustructureLayer.Migrations
                 name: "InventoryTransactions",
                 columns: table => new
                 {
-                    TransactionID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TransactionID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WarehouseID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WarehouseID = table.Column<int>(type: "int", nullable: true),
+                    ProductID = table.Column<int>(type: "int", nullable: true),
                     SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -44,9 +46,10 @@ namespace InfrustructureLayer.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Dimensions = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Dimensions = table.Column<string>(type: "nvarchar(1)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,8 +61,8 @@ namespace InfrustructureLayer.Migrations
                 columns: table => new
                 {
                     SerialNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProductID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShelfID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: true),
+                    ShelfID = table.Column<int>(type: "int", nullable: false),
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -71,10 +74,11 @@ namespace InfrustructureLayer.Migrations
                 name: "Shelves",
                 columns: table => new
                 {
-                    ShelfID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    WarehouseID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShelfID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WarehouseID = table.Column<int>(type: "int", nullable: true),
                     SpacePerShelfCM = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Levels = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Levels = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,9 +89,10 @@ namespace InfrustructureLayer.Migrations
                 name: "Warehouses",
                 columns: table => new
                 {
-                    WarehouseID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    WarehouseID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Warehousename = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CityID = table.Column<int>(type: "int", nullable: true),
                     AreaInSquareMeters = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -99,9 +104,10 @@ namespace InfrustructureLayer.Migrations
                 name: "WarehouseTransfers",
                 columns: table => new
                 {
-                    TransferID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FromWarehouseID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ToWarehouseID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TransferID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromWarehouseID = table.Column<int>(type: "int", nullable: true),
+                    ToWarehouseID = table.Column<int>(type: "int", nullable: true),
                     SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TransferDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
