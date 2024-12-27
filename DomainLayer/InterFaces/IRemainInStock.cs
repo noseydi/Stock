@@ -8,7 +8,7 @@ namespace DomainLayer.InterFaces
 {
     public interface IRemainInStock
     {
-        public int StockID (int stockID);
+        public int StockID (int id);
         public string ProductSerialNumber (int productID);
         public int Count (int stockID);
     }

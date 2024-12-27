@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.Sevices
 {
-    public class RemainInStockService : IRemainInStock
+    internal class StockInputService : IStockInput
     {
-        public int Count(int stockID)
+        public int? AreaInUse(int productQuantity, char dimensions)
         {
             throw new NotImplementedException();
         }
 
-        public string ProductSerialNumber(int productID)
+        public string ProductSerialNumber(string serialNumber)
         {
             throw new NotImplementedException();
         }
 
-        public int StockID(int stockID)
+        public int StockID(int id)
         {
             throw new NotImplementedException();
         }
